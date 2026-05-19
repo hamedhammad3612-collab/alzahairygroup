@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>شركة الزهيري جروب | الهندسة والتصميم</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    /* تنسيق التمرير الناعم */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #06182d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* شريط التنقل */
+    .navbar {
+      background: rgba(6, 24, 45, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 8%;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .nav-links a:hover {
+      color: #d4af37;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 40px 40px;
+      position: relative;
+      background:
+        linear-gradient(rgba(3, 15, 30, 0.88), rgba(3, 15, 30, 0.93)),
+        url('1000250238.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero {
+      max-width: 900px;
+    }
+
+    .logo {
+      width: 220px;
+      margin-bottom: 25px;
+      border-radius: 20px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(212, 175, 55, 0.4);
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #d4af37;
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      line-height: 1.8;
+      color: #eee;
+      margin-bottom: 35px;
+    }
+
+    .btns {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 35px;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .gold {
+      background: #d4af37;
+      color: #06182d;
+    }
+
+    .gold:hover {
+      background: #e0c050;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+    }
+
+    .outline {
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      background: transparent;
+    }
+
+    .outline:hover {
+      background: #d4af37;
+      color: #06182d;
+      transform: translateY(-5px);
+    }
+
+    section {
+      padding: 90px 8%;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 42px;
+      color: #d4af37;
+      position: relative;
+    }
+
+    .title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #d4af37;
+      margin: 15px auto 0;
+      border-radius: 5px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #0c2340;
+      padding: 35px;
+      border-radius: 20px;
+      transition: 0.4s;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #d4af37;
+      background: #0f2a4a;
+    }
+
+    .card .icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #d4af37;
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .card p {
+      line-height: 2;
+      color: #ddd;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+      line-height: 2.2;
+      font-size: 20px;
+      color: #ddd;
+    }
+
+    .contact {
+      text-align: center;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .contact p {
+      margin: 15px 0;
+      font-size: 22px;
+      direction: ltr;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      padding: 15px 35px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      display: inline-block;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    footer {
+      background: #04101f;
+      padding: 25px;
+      text-align: center;
+      color: #aaa;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* زر العودة للأعلى */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background: #d4af37;
+      color: #06182d;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-5px);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 38px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .logo {
+        width: 160px;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .navbar {
+        padding: 10px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- شريط التنقل -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">🏗️ الزهيري جروب</a>
+    <ul class="nav-links">
+      <li><a href="#home">الرئيسية</a></li>
+      <li><a href="#about">من نحن</a></li>
+      <li><a href="#services">الخدمات</a></li>
+      <li><a href="#contact">اتصل بنا</a></li>
+    </ul>
+  </nav>
+
+  <!-- القسم الرئيسي -->
+  <header id="home">
+    <div class="hero">
+      <img src="1000250238.jpg" alt="شعار الشركة" class="logo">
+      <h1>شركة الزهيري جروب</h1>
+      <p class="subtitle">
+        خبرة هندسية متكاملة في التصميم والتنفيذ والتشطيبات
+        وأعمال التصالحات والتراخيص بأعلى جودة واحترافية.
+      </p>
+      <div class="btns">
+        <a href="#services" class="btn gold">خدماتنا</a>
+        <a href="#contact" class="btn outline">تواصل معنا</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- من نحن -->
+  <section id="about">
+    <h2 class="title">من نحن</h2>
+    <div class="about">
+      نحن في شركة الزهيري جروب نقدم حلولاً هندسية متكاملة
+      تشمل التصميم الهندسي والإشراف والتنفيذ وإدارة المشروعات
+      والتشطيبات الحديثة، مع الالتزام بأعلى معايير الجودة والدقة.
+    </div>
+  </section>
+
+  <!-- الخدمات -->
+  <section id="services">
+    <h2 class="title">خدماتنا</h2>
+    <div class="services">
+      <div class="card">
+        <div class="icon">🏛️</div>
+        <h3>التصميم الهندسي</h3>
+        <p>تصميم معماري وإنشائي احترافي بأحدث البرامج الهندسية.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>التشطيبات</h3>
+        <p>تنفيذ وتشطيب جميع الوحدات السكنية والتجارية بأعلى جودة.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📋</div>
+        <h3>التصالحات</h3>
+        <p>إنهاء جميع إجراءات التصالحات والتراخيص للمباني.</p>
+      </div>
+      <div class="card">
+        <div class="icon">👷</div>
+        <h3>الإشراف والتنفيذ</h3>
+        <p>متابعة وإدارة المشروعات الهندسية باحترافية كاملة.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- اتصل بنا -->
+  <section id="contact">
+    <h2 class="title">تواصل معنا</h2>
+    <div class="contact">
+      <p>📞 0162347191</p>
+      <p>📍 شربين - الدقهلية</p>
+      <p>📧 info@alzahairygroup.com</p>
+      
+      <a href="https://wa.me/20162347191" target="_blank" class="whatsapp-btn">
+        💬 تواصل عبر واتساب
+      </a>
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer>
+    © 2025 جميع الحقوق محفوظة - شركة الزهيري جروب
+  </footer>
+
+  <!-- زر الرجوع للأعلى -->
+  <a href="#home" class="scroll-top">↑</a>
+
+</body>
+</html>
