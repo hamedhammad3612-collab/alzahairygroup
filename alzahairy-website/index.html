@@ -2,8 +2,16 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>شركة الزهيري جروب | الهندسة والتصميم</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>شركة الزهيري جروب | الهندسة المدنية والتصميم</title>
+
+  <!-- ========== PWA Meta Tags ========== -->
+  <meta name="theme-color" content="#06182d"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="الزهيري جروب"/>
+  <link rel="apple-touch-icon" href="images/icon-192.png"/>
+  <link rel="manifest" href="manifest.json"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,23 +23,28 @@
       padding: 0;
       box-sizing: border-box;
       font-family: 'Cairo', sans-serif;
-    }
-
-    /* تنسيق التمرير الناعم */
-    html {
-      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
     }
 
     body {
       background: #06182d;
       color: white;
       overflow-x: hidden;
+      transition: all 0.3s ease;
+      /* مساحة آمنة للهواتف مع النوتش */
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
     }
 
-    /* شريط التنقل */
+    /* ========== شريط التنقل العلوي ========== */
     .navbar {
       background: rgba(6, 24, 45, 0.95);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 15px 8%;
       position: fixed;
       top: 0;
@@ -41,54 +54,127 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
     }
 
     .nav-logo {
       font-size: 24px;
       font-weight: 800;
       color: #d4af37;
-      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-logo:active {
+      transform: scale(0.95);
+    }
+
+    /* ========== زر تغيير اللغة ========== */
+    .lang-btn {
+      padding: 8px 18px;
+      border: 2px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lang-btn:active {
+      transform: scale(0.95);
+      background: #d4af37;
+      color: #06182d;
     }
 
     .nav-links {
       display: flex;
-      gap: 30px;
+      gap: 10px;
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-links li {
+      padding: 10px 20px;
       color: white;
-      text-decoration: none;
       font-weight: 600;
-      transition: 0.3s;
       font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: 0.3s;
+      border: 2px solid transparent;
+      background: transparent;
+      white-space: nowrap;
     }
 
-    .nav-links a:hover {
-      color: #d4af37;
+    .nav-links li:active {
+      transform: scale(0.95);
     }
 
-    header {
+    .nav-links li.active {
+      background: #d4af37;
+      color: #06182d;
+      border-color: #d4af37;
+      font-weight: 700;
+    }
+
+    /* ========== المحتوى الرئيسي ========== */
+    .main-content {
+      padding-top: 90px;
       min-height: 100vh;
+    }
+
+    /* ========== الأقسام الرئيسية ========== */
+    .tab-content {
+      display: none;
+      padding: 20px 4% 40px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========== صفحة الترحيب ========== */
+    #home {
+      min-height: 80vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 100px 40px 40px;
-      position: relative;
       background:
         linear-gradient(rgba(3, 15, 30, 0.88), rgba(3, 15, 30, 0.93)),
-        url('1000250238.jpg');
+        url('images/1000250238.jpg');
       background-size: cover;
       background-position: center;
+      background-attachment: fixed;
     }
 
     .hero {
       max-width: 900px;
+      padding: 20px;
     }
 
     .logo {
-      width: 220px;
+      width: 180px;
       margin-bottom: 25px;
       border-radius: 20px;
       box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
@@ -96,14 +182,14 @@
     }
 
     h1 {
-      font-size: 60px;
+      font-size: 48px;
       color: #d4af37;
       margin-bottom: 15px;
       font-weight: 800;
     }
 
     .subtitle {
-      font-size: 24px;
+      font-size: 20px;
       line-height: 1.8;
       color: #eee;
       margin-bottom: 35px;
@@ -111,31 +197,30 @@
 
     .btns {
       display: flex;
-      gap: 20px;
+      gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 15px 35px;
+      padding: 14px 30px;
       border: none;
       border-radius: 12px;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       transition: 0.3s;
-      text-decoration: none;
       font-weight: bold;
+      font-family: 'Cairo', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
     }
 
     .gold {
       background: #d4af37;
       color: #06182d;
-    }
-
-    .gold:hover {
-      background: #e0c050;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
     }
 
     .outline {
@@ -144,20 +229,11 @@
       background: transparent;
     }
 
-    .outline:hover {
-      background: #d4af37;
-      color: #06182d;
-      transform: translateY(-5px);
-    }
-
-    section {
-      padding: 90px 8%;
-    }
-
+    /* ========== العناوين ========== */
     .title {
       text-align: center;
-      margin-bottom: 60px;
-      font-size: 42px;
+      margin-bottom: 35px;
+      font-size: 36px;
       color: #d4af37;
       position: relative;
     }
@@ -165,59 +241,273 @@
     .title::after {
       content: '';
       display: block;
-      width: 80px;
+      width: 60px;
       height: 3px;
       background: #d4af37;
-      margin: 15px auto 0;
+      margin: 12px auto 0;
       border-radius: 5px;
     }
 
-    .services {
+    /* ========== شريط التبويبات الفرعية (قابل للتمرير) ========== */
+    .sub-tabs-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      margin-bottom: 30px;
+    }
+
+    .sub-tabs-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sub-tabs-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 8px;
+      padding: 10px;
+      background: #0c2340;
+      border-radius: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      min-width: max-content;
+    }
+
+    .sub-tab {
+      padding: 10px 20px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: 0.3s;
+      border: 2px solid transparent;
+      background: transparent;
+      text-align: center;
+      font-family: 'Cairo', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sub-tab:active {
+      transform: scale(0.95);
+    }
+
+    .sub-tab.active {
+      background: #d4af37;
+      color: #06182d;
+      border-color: #d4af37;
+      font-weight: 700;
+    }
+
+    /* ========== المحتوى الفرعي ========== */
+    .sub-content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .sub-content.active {
+      display: block;
+    }
+
+    /* ========== كروت الخدمات ========== */
+    .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
     }
 
     .card {
       background: #0c2340;
-      padding: 35px;
+      padding: 30px;
       border-radius: 20px;
-      transition: 0.4s;
+      transition: 0.3s;
       border: 1px solid rgba(212, 175, 55, 0.2);
       text-align: center;
     }
 
-    .card:hover {
-      transform: translateY(-10px);
+    .card:active {
+      transform: scale(0.97);
       border-color: #d4af37;
-      background: #0f2a4a;
     }
 
     .card .icon {
-      font-size: 50px;
-      margin-bottom: 15px;
+      font-size: 45px;
+      margin-bottom: 12px;
     }
 
     .card h3 {
       color: #d4af37;
-      margin-bottom: 15px;
-      font-size: 28px;
+      margin-bottom: 12px;
+      font-size: 22px;
     }
 
     .card p {
-      line-height: 2;
+      line-height: 1.8;
       color: #ddd;
+      font-size: 15px;
     }
 
+    .card .card-btn {
+      margin-top: 18px;
+      padding: 10px 22px;
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+      font-size: 14px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .card .card-btn:active {
+      background: #d4af37;
+      color: #06182d;
+    }
+
+    /* ========== قائمة الخيارات ========== */
+    .options-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .option-item {
+      background: #0c2340;
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .option-item:active {
+      transform: scale(0.97);
+      border-color: #d4af37;
+    }
+
+    .option-item .icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .option-item h3 {
+      color: #d4af37;
+      margin-bottom: 8px;
+      font-size: 20px;
+    }
+
+    .option-item p {
+      color: #ccc;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* ========== معرض الصور ========== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      transition: 0.3s;
+      background: #0c2340;
+    }
+
+    .gallery-item:active {
+      transform: scale(0.97);
+      border-color: #d4af37;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .gallery-caption {
+      padding: 12px;
+      text-align: center;
+      color: #d4af37;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    /* ========== الفيديوهات ========== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .video-card {
+      background: #0c2340;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      transition: 0.3s;
+    }
+
+    .video-card video,
+    .video-card iframe {
+      width: 100%;
+      height: 200px;
+      display: block;
+    }
+
+    .video-card h3 {
+      color: #d4af37;
+      padding: 12px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    /* ========== من نحن ========== */
     .about {
       text-align: center;
       max-width: 900px;
       margin: auto;
-      line-height: 2.2;
-      font-size: 20px;
+      line-height: 2;
+      font-size: 18px;
       color: #ddd;
     }
 
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat-card {
+      background: #0c2340;
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      text-align: center;
+    }
+
+    .stat-card .number {
+      font-size: 35px;
+      color: #d4af37;
+      font-weight: 800;
+    }
+
+    .stat-card .label {
+      color: #ccc;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    /* ========== اتصل بنا ========== */
     .contact {
       text-align: center;
       max-width: 600px;
@@ -225,172 +515,850 @@
     }
 
     .contact p {
-      margin: 15px 0;
-      font-size: 22px;
-      direction: ltr;
+      margin: 12px 0;
+      font-size: 20px;
+    }
+
+    .contact-form {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: #0c2340;
+      color: white;
+      font-size: 16px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .contact-form textarea {
+      min-height: 100px;
+      resize: vertical;
     }
 
     .whatsapp-btn {
       background: #25D366;
       color: white;
-      padding: 15px 35px;
+      padding: 14px 30px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       display: inline-block;
       margin-top: 20px;
       transition: 0.3s;
     }
 
-    .whatsapp-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    .whatsapp-btn:active {
+      transform: scale(0.95);
     }
 
+    /* ========== زر تثبيت التطبيق ========== */
+    .install-banner {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d4af37;
+      color: #06182d;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      z-index: 999;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: slideUp 0.5s ease;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .install-banner.show {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+
+    /* ========== شريط التنقل السفلي للموبايل ========== */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(6, 24, 45, 0.98);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(212, 175, 55, 0.3);
+      z-index: 999;
+      padding: 8px 0;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+    }
+
+    .bottom-nav-inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #888;
+      cursor: pointer;
+      transition: 0.3s;
+      padding: 5px 10px;
+      border: none;
+      background: transparent;
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+    }
+
+    .bottom-nav-item .nav-icon {
+      font-size: 22px;
+    }
+
+    .bottom-nav-item.active {
+      color: #d4af37;
+    }
+
+    /* ========== الفوتر ========== */
     footer {
       background: #04101f;
-      padding: 25px;
+      padding: 20px;
       text-align: center;
       color: #aaa;
       border-top: 1px solid rgba(212, 175, 55, 0.2);
+      font-size: 14px;
+      padding-bottom: max(20px, calc(70px + env(safe-area-inset-bottom)));
     }
 
-    /* زر العودة للأعلى */
-    .scroll-top {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      background: #d4af37;
-      color: #06182d;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-      transition: 0.3s;
-      text-decoration: none;
+    /* ========== RTL/LTR ========== */
+    body.ltr {
+      direction: ltr;
     }
 
-    .scroll-top:hover {
-      transform: translateY(-5px);
-    }
-
+    /* ========== موبايل ========== */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 38px;
+      h1 { font-size: 32px; }
+      .subtitle { font-size: 16px; }
+      .logo { width: 140px; }
+      
+      /* إخفاء القائمة العلوية في الموبايل */
+      .nav-links { display: none; }
+      
+      /* إظهار القائمة السفلية */
+      .bottom-nav { display: block; }
+      
+      .navbar { 
+        padding: 10px 4%; 
+        justify-content: center;
       }
+      
+      .nav-left {
+        justify-content: center;
+        width: 100%;
+      }
+      
+      .sub-tabs-container { 
+        gap: 5px; 
+        padding: 8px;
+      }
+      
+      .sub-tab { 
+        padding: 8px 14px; 
+        font-size: 13px; 
+      }
+      
+      .gallery { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .main-content { padding-top: 70px; }
+      .tab-content { padding: 15px 3% 30px; }
+      .title { font-size: 28px; }
+      .card { padding: 20px; }
+      
+      footer {
+        padding-bottom: max(20px, calc(80px + env(safe-area-inset-bottom)));
+      }
+    }
 
-      .subtitle {
-        font-size: 18px;
-      }
-
-      .logo {
-        width: 160px;
-      }
-
-      .nav-links {
-        gap: 15px;
-      }
-
-      .navbar {
-        padding: 10px 5%;
-      }
+    @media (max-width: 380px) {
+      h1 { font-size: 26px; }
+      .subtitle { font-size: 14px; }
+      .logo { width: 120px; }
+      .btn { padding: 12px 20px; font-size: 14px; }
+      .sub-tab { padding: 6px 10px; font-size: 12px; }
     }
   </style>
 </head>
 
-<body>
+<body id="bodyElement">
 
-  <!-- شريط التنقل -->
+  <!-- ========== شريط التنقل العلوي ========== -->
   <nav class="navbar">
-    <a href="#" class="nav-logo">🏗️ الزهيري جروب</a>
+    <div class="nav-left">
+      <div class="nav-logo" onclick="switchMainTab('home')">✨ <span data-lang="logo">الزهيري جروب</span></div>
+      <button class="lang-btn" onclick="toggleLanguage()">
+        <span class="lang-icon">🌐</span>
+        <span data-lang="lang-switch">English</span>
+      </button>
+    </div>
     <ul class="nav-links">
-      <li><a href="#home">الرئيسية</a></li>
-      <li><a href="#about">من نحن</a></li>
-      <li><a href="#services">الخدمات</a></li>
-      <li><a href="#contact">اتصل بنا</a></li>
+      <li class="active" onclick="switchMainTab('home')" data-lang="nav-home">الرئيسية</li>
+      <li onclick="switchMainTab('about')" data-lang="nav-about">من نحن</li>
+      <li onclick="switchMainTab('services')" data-lang="nav-services">الخدمات</li>
+      <li onclick="switchMainTab('gallery')" data-lang="nav-gallery">معرض الأعمال</li>
+      <li onclick="switchMainTab('learning')" data-lang="nav-learning">تعلم معنا</li>
+      <li onclick="switchMainTab('contact')" data-lang="nav-contact">اتصل بنا</li>
     </ul>
   </nav>
 
-  <!-- القسم الرئيسي -->
-  <header id="home">
-    <div class="hero">
-      <img src="1000250238.jpg" alt="شعار الشركة" class="logo">
-      <h1>شركة الزهيري جروب</h1>
-      <p class="subtitle">
-        خبرة هندسية متكاملة في التصميم والتنفيذ والتشطيبات
-        وأعمال التصالحات والتراخيص بأعلى جودة واحترافية.
-      </p>
-      <div class="btns">
-        <a href="#services" class="btn gold">خدماتنا</a>
-        <a href="#contact" class="btn outline">تواصل معنا</a>
+  <!-- ========== المحتوى الرئيسي (نفس المحتوى السابق) ========== -->
+  <div class="main-content">
+
+    <!-- الرئيسية -->
+    <div id="home" class="tab-content active">
+      <div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div class="hero">
+          <img src="images/1000250238.jpg" alt="شعار الشركة" class="logo">
+          <h1 data-lang="home-title">شركة الزهيري جروب</h1>
+          <p class="subtitle" data-lang="home-subtitle">
+            خبرة هندسية متكاملة في التصميم والتنفيذ والتشطيبات
+            وأعمال التصالحات والتراخيص بأعلى جودة واحترافية.
+          </p>
+          <div class="btns">
+            <button class="btn gold" onclick="switchMainTab('services')" data-lang="home-services-btn">خدماتنا</button>
+            <button class="btn outline" onclick="switchMainTab('contact')" data-lang="home-contact-btn">تواصل معنا</button>
+          </div>
+        </div>
       </div>
     </div>
-  </header>
 
-  <!-- من نحن -->
-  <section id="about">
-    <h2 class="title">من نحن</h2>
-    <div class="about">
-      نحن في شركة الزهيري جروب نقدم حلولاً هندسية متكاملة
-      تشمل التصميم الهندسي والإشراف والتنفيذ وإدارة المشروعات
-      والتشطيبات الحديثة، مع الالتزام بأعلى معايير الجودة والدقة.
-    </div>
-  </section>
-
-  <!-- الخدمات -->
-  <section id="services">
-    <h2 class="title">خدماتنا</h2>
-    <div class="services">
-      <div class="card">
-        <div class="icon">🏛️</div>
-        <h3>التصميم الهندسي</h3>
-        <p>تصميم معماري وإنشائي احترافي بأحدث البرامج الهندسية.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>التشطيبات</h3>
-        <p>تنفيذ وتشطيب جميع الوحدات السكنية والتجارية بأعلى جودة.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📋</div>
-        <h3>التصالحات</h3>
-        <p>إنهاء جميع إجراءات التصالحات والتراخيص للمباني.</p>
-      </div>
-      <div class="card">
-        <div class="icon">👷</div>
-        <h3>الإشراف والتنفيذ</h3>
-        <p>متابعة وإدارة المشروعات الهندسية باحترافية كاملة.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- اتصل بنا -->
-  <section id="contact">
-    <h2 class="title">تواصل معنا</h2>
-    <div class="contact">
-      <p>📞 0162347191</p>
-      <p>📍 شربين - الدقهلية</p>
-      <p>📧 info@alzahairygroup.com</p>
+    <!-- من نحن -->
+    <div id="about" class="tab-content">
+      <h2 class="title" data-lang="about-title">من نحن</h2>
       
-      <a href="https://wa.me/20162347191" target="_blank" class="whatsapp-btn">
-        💬 تواصل عبر واتساب
-      </a>
-    </div>
-  </section>
+      <div class="sub-tabs-scroll">
+        <div class="sub-tabs-container" id="about-subtabs">
+          <div class="sub-tab active" onclick="switchSubTab('about', 'about-overview')" data-lang="about-overview-tab">نبذة عنا</div>
+          <div class="sub-tab" onclick="switchSubTab('about', 'about-vision')" data-lang="about-vision-tab">رؤيتنا</div>
+          <div class="sub-tab" onclick="switchSubTab('about', 'about-team')" data-lang="about-team-tab">فريق العمل</div>
+          <div class="sub-tab" onclick="switchSubTab('about', 'about-stats')" data-lang="about-stats-tab">إحصائيات</div>
+        </div>
+      </div>
 
-  <!-- الفوتر -->
+      <div id="about-overview" class="sub-content active">
+        <div class="about">
+          <p style="margin-bottom: 25px;" data-lang="about-overview-p1">
+            نحن في شركة الزهيري جروب نقدم حلولاً هندسية متكاملة
+            تشمل التصميم الهندسي والإشراف والتنفيذ وإدارة المشروعات
+            والتشطيبات الحديثة، مع الالتزام بأعلى معايير الجودة والدقة.
+          </p>
+          <p data-lang="about-overview-p2">
+            تأسست الشركة على يد نخبة من المهندسين المتخصصين في مجالات
+            الهندسة المدنية والمعمارية، ونسعى دائماً لتقديم خدمات
+            مبتكرة تلبي احتياجات عملائنا وتفوق توقعاتهم.
+          </p>
+        </div>
+      </div>
+
+      <div id="about-vision" class="sub-content">
+        <div class="about">
+          <p style="margin-bottom: 25px; font-size: 22px; color: #d4af37;" data-lang="about-vision-label">🎯 رؤيتنا</p>
+          <p data-lang="about-vision-text">
+            أن نكون الشركة الرائدة في مجال الهندسة والتصميم في مصر
+            والشرق الأوسط، من خلال تقديم حلول هندسية مبتكرة ومستدامة
+            تلبي تطلعات عملائنا وتساهم في تطوير المجتمع.
+          </p>
+        </div>
+      </div>
+
+      <div id="about-team" class="sub-content">
+        <div class="options-list">
+          <div class="option-item">
+            <div class="icon">👨‍💼</div>
+            <h3 data-lang="team-name1">م/ محمد الزهيري</h3>
+            <p data-lang="team-role1">المدير التنفيذي - استشاري هندسي</p>
+          </div>
+          <div class="option-item">
+            <div class="icon">👷</div>
+            <h3 data-lang="team-name2">م/ حامد حماد</h3>
+            <p data-lang="team-role2">مدير المشروعات - مهندس مدني</p>
+          </div>
+          <div class="option-item">
+            <div class="icon">🏛️</div>
+            <h3 data-lang="team-name3">م/ رحمة تحسين</h3>
+            <p data-lang="team-role3">مهندسة معمارية - تصميم داخلي</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="about-stats" class="sub-content">
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="number">+50</div>
+            <div class="label" data-lang="stat1">مشروع منجز</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">+10</div>
+            <div class="label" data-lang="stat2">سنوات خبرة</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">+3000</div>
+            <div class="label" data-lang="stat3">عميل سعيد</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">5</div>
+            <div class="label" data-lang="stat4">مهندسين متخصصين</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- الخدمات -->
+    <div id="services" class="tab-content">
+      <h2 class="title" data-lang="services-title">خدماتنا</h2>
+      
+      <div class="sub-tabs-scroll">
+        <div class="sub-tabs-container" id="services-subtabs">
+          <div class="sub-tab active" onclick="switchSubTab('services', 'services-all')" data-lang="services-all-tab">كل الخدمات</div>
+          <div class="sub-tab" onclick="switchSubTab('services', 'services-design')" data-lang="services-design-tab">التصميم</div>
+          <div class="sub-tab" onclick="switchSubTab('services', 'services-finishing')" data-lang="services-finishing-tab">التشطيبات</div>
+          <div class="sub-tab" onclick="switchSubTab('services', 'services-supervision')" data-lang="services-supervision-tab">الإشراف</div>
+          <div class="sub-tab" onclick="switchSubTab('services', 'services-licenses')" data-lang="services-licenses-tab">التراخيص</div>
+        </div>
+      </div>
+
+      <div id="services-all" class="sub-content active">
+        <div class="services-grid">
+          <div class="card">
+            <div class="icon">🏛️</div>
+            <h3 data-lang="service1-title">التصميم الهندسي</h3>
+            <p data-lang="service1-desc">تصميم معماري وإنشائي احترافي بأحدث البرامج الهندسية.</p>
+            <button class="card-btn" onclick="switchSubTab('services', 'services-design')" data-lang="details-btn">عرض التفاصيل</button>
+          </div>
+          <div class="card">
+            <div class="icon">🏢</div>
+            <h3 data-lang="service2-title">التشطيبات</h3>
+            <p data-lang="service2-desc">تنفيذ وتشطيب جميع الوحدات السكنية والتجارية بأعلى جودة.</p>
+            <button class="card-btn" onclick="switchSubTab('services', 'services-finishing')" data-lang="details-btn">عرض التفاصيل</button>
+          </div>
+          <div class="card">
+            <div class="icon">👷</div>
+            <h3 data-lang="service3-title">الإشراف والتنفيذ</h3>
+            <p data-lang="service3-desc">متابعة وإدارة المشروعات الهندسية باحترافية كاملة.</p>
+            <button class="card-btn" onclick="switchSubTab('services', 'services-supervision')" data-lang="details-btn">عرض التفاصيل</button>
+          </div>
+          <div class="card">
+            <div class="icon">📋</div>
+            <h3 data-lang="service4-title">التراخيص والتصالحات</h3>
+            <p data-lang="service4-desc">إنهاء إجراءات التراخيص والتصالحات مع الجهات المختصة.</p>
+            <button class="card-btn" onclick="switchSubTab('services', 'services-licenses')" data-lang="details-btn">عرض التفاصيل</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="services-design" class="sub-content">
+        <h3 style="color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 24px;" data-lang="design-subtitle">🏛️ خدمات التصميم الهندسي</h3>
+        <div class="options-list">
+          <div class="option-item"><div class="icon">🏠</div><h3 data-lang="design-opt1">تصميم فلل وقصور</h3><p data-lang="design-opt1-desc">تصاميم عصرية وكلاسيكية</p></div>
+          <div class="option-item"><div class="icon">🏢</div><h3 data-lang="design-opt2">تصميم مباني تجارية</h3><p data-lang="design-opt2-desc">تصاميم عملية وجذابة</p></div>
+          <div class="option-item"><div class="icon">🏗️</div><h3 data-lang="design-opt3">مخططات إنشائية</h3><p data-lang="design-opt3-desc">مخططات دقيقة بمعايير السلامة</p></div>
+          <div class="option-item"><div class="icon">🖥️</div><h3 data-lang="design-opt4">تصميم 3D</h3><p data-lang="design-opt4-desc">عرض ثلاثي الأبعاد واقعي</p></div>
+        </div>
+      </div>
+
+      <div id="services-finishing" class="sub-content">
+        <h3 style="color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 24px;" data-lang="finishing-subtitle">🏢 خدمات التشطيبات</h3>
+        <div class="options-list">
+          <div class="option-item"><div class="icon">🪚</div><h3 data-lang="finishing-opt1">تشطيبات سكنية</h3><p data-lang="finishing-opt1-desc">تشطيب شقق وفيلات</p></div>
+          <div class="option-item"><div class="icon">🏬</div><h3 data-lang="finishing-opt2">تشطيبات تجارية</h3><p data-lang="finishing-opt2-desc">تشطيب محلات ومكاتب</p></div>
+          <div class="option-item"><div class="icon">🎨</div><h3 data-lang="finishing-opt3">دهانات وديكورات</h3><p data-lang="finishing-opt3-desc">أحدث صيحات الديكور</p></div>
+          <div class="option-item"><div class="icon">🪟</div><h3 data-lang="finishing-opt4">أعمال النجارة</h3><p data-lang="finishing-opt4-desc">أبواب وشبابيك فاخرة</p></div>
+        </div>
+      </div>
+
+      <div id="services-supervision" class="sub-content">
+        <h3 style="color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 24px;" data-lang="supervision-subtitle">👷 خدمات الإشراف والتنفيذ</h3>
+        <div class="options-list">
+          <div class="option-item"><div class="icon">📊</div><h3 data-lang="supervision-opt1">إدارة المشروعات</h3><p data-lang="supervision-opt1-desc">تخطيط ومتابعة المشروع</p></div>
+          <div class="option-item"><div class="icon">✅</div><h3 data-lang="supervision-opt2">ضبط الجودة</h3><p data-lang="supervision-opt2-desc">فحص المواد والتنفيذ</p></div>
+          <div class="option-item"><div class="icon">📅</div><h3 data-lang="supervision-opt3">الجدولة الزمنية</h3><p data-lang="supervision-opt3-desc">التزام بمواعيد التسليم</p></div>
+        </div>
+      </div>
+
+      <div id="services-licenses" class="sub-content">
+        <h3 style="color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 24px;" data-lang="licenses-subtitle">📋 خدمات التراخيص والتصالحات</h3>
+        <div class="options-list">
+          <div class="option-item"><div class="icon">📝</div><h3 data-lang="licenses-opt1">تراخيص البناء</h3><p data-lang="licenses-opt1-desc">استخراج تراخيص قانونية</p></div>
+          <div class="option-item"><div class="icon">🤝</div><h3 data-lang="licenses-opt2">التصالحات</h3><p data-lang="licenses-opt2-desc">إنهاء إجراءات التصالح</p></div>
+          <div class="option-item"><div class="icon">📐</div><h3 data-lang="licenses-opt3">الرفع المساحي</h3><p data-lang="licenses-opt3-desc">رفع مساحي دقيق</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- معرض الأعمال -->
+    <div id="gallery" class="tab-content">
+      <h2 class="title" data-lang="gallery-title">معرض أعمالنا</h2>
+      
+      <div class="sub-tabs-scroll">
+        <div class="sub-tabs-container" id="gallery-subtabs">
+          <div class="sub-tab active" onclick="switchSubTab('gallery', 'gallery-design')" data-lang="gallery-design-tab">تصاميم هندسية</div>
+          <div class="sub-tab" onclick="switchSubTab('gallery', 'gallery-finishing')" data-lang="gallery-finishing-tab">تشطيبات</div>
+          <div class="sub-tab" onclick="switchSubTab('gallery', 'gallery-projects')" data-lang="gallery-projects-tab">مشروعات منفذة</div>
+          <div class="sub-tab" onclick="switchSubTab('gallery', 'gallery-3d')" data-lang="gallery-3d-tab">تصاميم 3D</div>
+        </div>
+      </div>
+
+      <div id="gallery-design" class="sub-content active">
+        <div class="gallery">
+          <div class="gallery-item"><img src="images/design-1.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap1">تصميم فيلا سكنية فاخرة</div></div>
+          <div class="gallery-item"><img src="images/design-2.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap2">مخطط إنشائي - عمارة 5 أدوار</div></div>
+          <div class="gallery-item"><img src="images/design-3.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap3">تصميم واجهة مبنى تجاري</div></div>
+        </div>
+      </div>
+
+      <div id="gallery-finishing" class="sub-content">
+        <div class="gallery">
+          <div class="gallery-item"><img src="images/finishing-1.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap4">تشطيب شقة سكنية كاملة</div></div>
+          <div class="gallery-item"><img src="images/finishing-2.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap5">تشطيب فيلا مودرن</div></div>
+          <div class="gallery-item"><img src="images/finishing-3.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap6">ديكورات داخلية فاخرة</div></div>
+        </div>
+      </div>
+
+      <div id="gallery-projects" class="sub-content">
+        <div class="gallery">
+          <div class="gallery-item"><img src="images/projects/project1.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap7">مبنى إداري - شربين</div></div>
+          <div class="gallery-item"><img src="images/projects/project2.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap8">عمارة سكنية - دنجواي</div></div>
+        </div>
+      </div>
+
+      <div id="gallery-3d" class="sub-content">
+        <div class="gallery">
+          <div class="gallery-item"><img src="images/3d-1.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap9">عرض 3D - فيلا سكنية</div></div>
+          <div class="gallery-item"><img src="images/3d-2.jpg" alt=""><div class="gallery-caption" data-lang="gallery-cap10">عرض 3D - تصميم داخلي</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تعلم معنا -->
+    <div id="learning" class="tab-content">
+      <h2 class="title" data-lang="learning-title">تعلم معنا</h2>
+      
+      <div class="sub-tabs-scroll">
+        <div class="sub-tabs-container" id="learning-subtabs">
+          <div class="sub-tab active" onclick="switchSubTab('learning', 'learning-courses')" data-lang="learning-courses-tab">كورسات</div>
+          <div class="sub-tab" onclick="switchSubTab('learning', 'learning-videos')" data-lang="learning-videos-tab">فيديوهات</div>
+          <div class="sub-tab" onclick="switchSubTab('learning', 'learning-tips')" data-lang="learning-tips-tab">نصائح هندسية</div>
+          <div class="sub-tab" onclick="switchSubTab('learning', 'learning-books')" data-lang="learning-books-tab">كتب ومراجع</div>
+        </div>
+      </div>
+
+      <div id="learning-courses" class="sub-content active">
+        <div class="options-list">
+          <div class="option-item"><div class="icon">📐</div><h3>AutoCAD</h3><p data-lang="course1">تعلم أساسيات الرسم الهندسي</p></div>
+          <div class="option-item"><div class="icon">🏗️</div><h3>Revit Structure</h3><p data-lang="course2">النمذجة الإنشائية المتقدمة</p></div>
+          <div class="option-item"><div class="icon">🎨</div><h3>3ds Max</h3><p data-lang="course3">الإخراج المعماري والتصميم الداخلي</p></div>
+          <div class="option-item"><div class="icon">📏</div><h3 data-lang="course4-title">المساحة والرفع</h3><p data-lang="course4">أساسيات المساحة الهندسية</p></div>
+        </div>
+      </div>
+
+      <div id="learning-videos" class="sub-content">
+        <div class="video-grid">
+          <div class="video-card">
+            <video controls><source src="videos/lesson-1.mp4" type="video/mp4"></video>
+            <h3 data-lang="video1">أساسيات التصميم الهندسي</h3>
+          </div>
+          <div class="video-card">
+            <video controls><source src="videos/lesson-2.mp4" type="video/mp4"></video>
+            <h3 data-lang="video2">شرح برنامج AutoCAD</h3>
+          </div>
+        </div>
+      </div>
+
+      <div id="learning-tips" class="sub-content">
+        <div class="options-list">
+          <div class="option-item"><div class="icon">💡</div><h3 data-lang="tip1">اختيار مواد البناء</h3><p data-lang="tip1-desc">نصائح لاختيار أفضل الخامات</p></div>
+          <div class="option-item"><div class="icon">💰</div><h3 data-lang="tip2">توفير التكاليف</h3><p data-lang="tip2-desc">إدارة ميزانية البناء بذكاء</p></div>
+          <div class="option-item"><div class="icon">🏠</div><h3 data-lang="tip3">تصميم بيت العمر</h3><p data-lang="tip3-desc">خطوات تصميم منزل أحلامك</p></div>
+        </div>
+      </div>
+
+      <div id="learning-books" class="sub-content">
+        <div class="options-list">
+          <div class="option-item"><div class="icon">📕</div><h3 data-lang="book1">أساسيات الهندسة المدنية</h3><p data-lang="book1-desc">مرجع شامل للمهندس المدني</p></div>
+          <div class="option-item"><div class="icon">📗</div><h3 data-lang="book2">التصميم المعماري</h3><p data-lang="book2-desc">مبادئ وأسس التصميم</p></div>
+          <div class="option-item"><div class="icon">📘</div><h3 data-lang="book3">كود البناء المصري</h3><p data-lang="book3-desc">الاشتراطات والمعايير الرسمية</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- اتصل بنا -->
+    <div id="contact" class="tab-content">
+      <h2 class="title" data-lang="contact-title">تواصل معنا</h2>
+      
+      <div class="sub-tabs-scroll">
+        <div class="sub-tabs-container" id="contact-subtabs">
+          <div class="sub-tab active" onclick="switchSubTab('contact', 'contact-info')" data-lang="contact-info-tab">معلومات التواصل</div>
+          <div class="sub-tab" onclick="switchSubTab('contact', 'contact-form')" data-lang="contact-form-tab">راسلنا</div>
+          <div class="sub-tab" onclick="switchSubTab('contact', 'contact-location')" data-lang="contact-location-tab">موقعنا</div>
+        </div>
+      </div>
+
+      <div id="contact-info" class="sub-content active">
+        <div class="contact">
+          <p>📞 0162347191</p>
+          <p>📍 دنجواي - شربين - الدقهلية</p>
+          <p>📧 mohamedzihary11@gmail.com</p>
+          <a href="https://wa.me/20162347191" target="_blank" class="whatsapp-btn" data-lang="whatsapp-btn">💬 تواصل عبر واتساب</a>
+        </div>
+      </div>
+
+      <div id="contact-form" class="sub-content">
+        <div class="contact">
+          <form class="contact-form" onsubmit="event.preventDefault(); alert(currentLang==='ar'?'شكراً لتواصلك معنا!':'Thank you! We will reply soon.');">
+            <input type="text" data-lang-placeholder="form-name" required>
+            <input type="tel" data-lang-placeholder="form-phone" required>
+            <input type="email" data-lang-placeholder="form-email">
+            <textarea data-lang-placeholder="form-message" required></textarea>
+            <button type="submit" class="btn gold" style="width:100%;" data-lang="form-submit">إرسال الرسالة</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="contact-location" class="sub-content">
+        <div class="contact">
+          <p>📍 دنجواي - شربين - الدقهلية</p>
+          <div style="width:100%;height:300px;background:#0c2340;border-radius:15px;border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;">
+            <p style="color:#aaa;" data-lang="map-placeholder">الخريطة هنا</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== القائمة السفلية للموبايل ========== -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <button class="bottom-nav-item active" onclick="switchMainTab('home')">
+        <span class="nav-icon">🏠</span>
+        <span data-lang="nav-home">الرئيسية</span>
+      </button>
+      <button class="bottom-nav-item" onclick="switchMainTab('services')">
+        <span class="nav-icon">🛠️</span>
+        <span data-lang="nav-services">الخدمات</span>
+      </button>
+      <button class="bottom-nav-item" onclick="switchMainTab('gallery')">
+        <span class="nav-icon">🖼️</span>
+        <span data-lang="nav-gallery">المعرض</span>
+      </button>
+      <button class="bottom-nav-item" onclick="switchMainTab('learning')">
+        <span class="nav-icon">📚</span>
+        <span data-lang="nav-learning">تعلم</span>
+      </button>
+      <button class="bottom-nav-item" onclick="switchMainTab('contact')">
+        <span class="nav-icon">📞</span>
+        <span data-lang="nav-contact">اتصل</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== زر تثبيت التطبيق ========== -->
+  <button class="install-banner" id="installBanner" onclick="installApp()" data-lang="install-btn">
+    📲 تثبيت التطبيق
+  </button>
+
   <footer>
-    © 2025 جميع الحقوق محفوظة - شركة الزهيري جروب
+    <span data-lang="footer">© 2025 جميع الحقوق محفوظة - شركة الزهيري جروب</span>
   </footer>
 
-  <!-- زر الرجوع للأعلى -->
-  <a href="#home" class="scroll-top">↑</a>
+  <!-- ========== Service Worker Registration ========== -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('✅ Service Worker registered'))
+          .catch(err => console.log('❌ SW registration failed:', err));
+      });
+    }
+  </script>
+
+  <!-- ========== جميع الـ Scripts ========== -->
+  <script>
+    // ========== PWA Install ==========
+    let deferredPrompt;
+    const installBanner = document.getElementById('installBanner');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      // إظهار زر التثبيت بعد 3 ثواني
+      setTimeout(() => {
+        installBanner.classList.add('show');
+      }, 3000);
+    });
+
+    function installApp() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('✅ User installed the app');
+          }
+          deferredPrompt = null;
+          installBanner.classList.remove('show');
+        });
+      }
+    }
+
+    // إخفاء الزر إذا كان التطبيق مثبتاً بالفعل
+    window.addEventListener('appinstalled', () => {
+      installBanner.classList.remove('show');
+      console.log('✅ App installed successfully');
+    });
+
+    // ========== اللغة الحالية ==========
+    let currentLang = 'ar';
+
+    const translations = {
+      ar: {
+        'install-btn': '📲 تثبيت التطبيق',
+        'logo': 'الزهيري جروب', 'lang-switch': 'English',
+        'nav-home': 'الرئيسية', 'nav-about': 'من نحن', 'nav-services': 'الخدمات',
+        'nav-gallery': 'معرض الأعمال', 'nav-learning': 'تعلم معنا', 'nav-contact': 'اتصل بنا',
+        'home-title': 'شركة الزهيري جروب',
+        'home-subtitle': 'خبرة هندسية متكاملة في التصميم والتنفيذ والتشطيبات وأعمال التصالحات والتراخيص بأعلى جودة واحترافية.',
+        'home-services-btn': 'خدماتنا', 'home-contact-btn': 'تواصل معنا',
+        'about-title': 'من نحن', 'about-overview-tab': 'نبذة عنا', 'about-vision-tab': 'رؤيتنا',
+        'about-team-tab': 'فريق العمل', 'about-stats-tab': 'إحصائيات',
+        'about-overview-p1': 'نحن في شركة الزهيري جروب نقدم حلولاً هندسية متكاملة تشمل التصميم الهندسي والإشراف والتنفيذ وإدارة المشروعات والتشطيبات الحديثة، مع الالتزام بأعلى معايير الجودة والدقة.',
+        'about-overview-p2': 'تأسست الشركة على يد نخبة من المهندسين المتخصصين في مجالات الهندسة المدنية والمعمارية، ونسعى دائماً لتقديم خدمات مبتكرة تلبي احتياجات عملائنا وتفوق توقعاتهم.',
+        'about-vision-label': '🎯 رؤيتنا',
+        'about-vision-text': 'أن نكون الشركة الرائدة في مجال الهندسة والتصميم في مصر والشرق الأوسط، من خلال تقديم حلول هندسية مبتكرة ومستدامة تلبي تطلعات عملائنا وتساهم في تطوير المجتمع.',
+        'team-name1': 'م/ محمد الزهيري', 'team-role1': 'المدير التنفيذي - استشاري هندسي',
+        'team-name2': 'م/ حامد حماد', 'team-role2': 'مدير المشروعات - مهندس مدني',
+        'team-name3': 'م/ رحمة تحسين', 'team-role3': 'مهندسة معمارية - تصميم داخلي',
+        'stat1': 'مشروع منجز', 'stat2': 'سنوات خبرة', 'stat3': 'عميل سعيد', 'stat4': 'مهندسين متخصصين',
+        'services-title': 'خدماتنا', 'services-all-tab': 'كل الخدمات', 'services-design-tab': 'التصميم',
+        'services-finishing-tab': 'التشطيبات', 'services-supervision-tab': 'الإشراف', 'services-licenses-tab': 'التراخيص',
+        'service1-title': 'التصميم الهندسي', 'service1-desc': 'تصميم معماري وإنشائي احترافي بأحدث البرامج الهندسية.',
+        'service2-title': 'التشطيبات', 'service2-desc': 'تنفيذ وتشطيب جميع الوحدات بأعلى جودة.',
+        'service3-title': 'الإشراف والتنفيذ', 'service3-desc': 'متابعة وإدارة المشروعات الهندسية باحترافية كاملة.',
+        'service4-title': 'التراخيص والتصالحات', 'service4-desc': 'إنهاء إجراءات التراخيص والتصالحات.',
+        'details-btn': 'عرض التفاصيل',
+        'design-subtitle': '🏛️ خدمات التصميم الهندسي',
+        'design-opt1': 'تصميم فلل وقصور', 'design-opt1-desc': 'تصاميم عصرية وكلاسيكية',
+        'design-opt2': 'تصميم مباني تجارية', 'design-opt2-desc': 'تصاميم عملية وجذابة',
+        'design-opt3': 'مخططات إنشائية', 'design-opt3-desc': 'مخططات دقيقة بمعايير السلامة',
+        'design-opt4': 'تصميم 3D', 'design-opt4-desc': 'عرض ثلاثي الأبعاد واقعي',
+        'finishing-subtitle': '🏢 خدمات التشطيبات',
+        'finishing-opt1': 'تشطيبات سكنية', 'finishing-opt1-desc': 'تشطيب شقق وفيلات',
+        'finishing-opt2': 'تشطيبات تجارية', 'finishing-opt2-desc': 'تشطيب محلات ومكاتب',
+        'finishing-opt3': 'دهانات وديكورات', 'finishing-opt3-desc': 'أحدث صيحات الديكور',
+        'finishing-opt4': 'أعمال النجارة', 'finishing-opt4-desc': 'أبواب وشبابيك فاخرة',
+        'supervision-subtitle': '👷 خدمات الإشراف والتنفيذ',
+        'supervision-opt1': 'إدارة المشروعات', 'supervision-opt1-desc': 'تخطيط ومتابعة المشروع',
+        'supervision-opt2': 'ضبط الجودة', 'supervision-opt2-desc': 'فحص المواد والتنفيذ',
+        'supervision-opt3': 'الجدولة الزمنية', 'supervision-opt3-desc': 'التزام بمواعيد التسليم',
+        'licenses-subtitle': '📋 خدمات التراخيص والتصالحات',
+        'licenses-opt1': 'تراخيص البناء', 'licenses-opt1-desc': 'استخراج تراخيص قانونية',
+        'licenses-opt2': 'التصالحات', 'licenses-opt2-desc': 'إنهاء إجراءات التصالح',
+        'licenses-opt3': 'الرفع المساحي', 'licenses-opt3-desc': 'رفع مساحي دقيق',
+        'gallery-title': 'معرض أعمالنا', 'gallery-design-tab': 'تصاميم هندسية',
+        'gallery-finishing-tab': 'تشطيبات', 'gallery-projects-tab': 'مشروعات منفذة', 'gallery-3d-tab': 'تصاميم 3D',
+        'gallery-cap1': 'تصميم فيلا سكنية فاخرة', 'gallery-cap2': 'مخطط إنشائي - عمارة 5 أدوار',
+        'gallery-cap3': 'تصميم واجهة مبنى تجاري', 'gallery-cap4': 'تشطيب شقة سكنية كاملة',
+        'gallery-cap5': 'تشطيب فيلا مودرن', 'gallery-cap6': 'ديكورات داخلية فاخرة',
+        'gallery-cap7': 'مبنى إداري - شربين', 'gallery-cap8': 'عمارة سكنية - دنجواي',
+        'gallery-cap9': 'عرض 3D - فيلا سكنية', 'gallery-cap10': 'عرض 3D - تصميم داخلي',
+        'learning-title': 'تعلم معنا', 'learning-courses-tab': 'كورسات', 'learning-videos-tab': 'فيديوهات',
+        'learning-tips-tab': 'نصائح هندسية', 'learning-books-tab': 'كتب ومراجع',
+        'course1': 'تعلم أساسيات الرسم الهندسي', 'course2': 'النمذجة الإنشائية المتقدمة',
+        'course3': 'الإخراج المعماري والتصميم الداخلي', 'course4-title': 'المساحة والرفع', 'course4': 'أساسيات المساحة الهندسية',
+        'video1': 'أساسيات التصميم الهندسي', 'video2': 'شرح برنامج AutoCAD', 'video3': 'محاضرة: التصميم الإنشائي',
+        'tip1': 'اختيار مواد البناء', 'tip1-desc': 'نصائح لاختيار أفضل الخامات',
+        'tip2': 'توفير التكاليف', 'tip2-desc': 'إدارة ميزانية البناء بذكاء',
+        'tip3': 'تصميم بيت العمر', 'tip3-desc': 'خطوات تصميم منزل أحلامك',
+        'book1': 'أساسيات الهندسة المدنية', 'book1-desc': 'مرجع شامل للمهندس المدني',
+        'book2': 'التصميم المعماري', 'book2-desc': 'مبادئ وأسس التصميم',
+        'book3': 'كود البناء المصري', 'book3-desc': 'الاشتراطات والمعايير الرسمية',
+        'contact-title': 'تواصل معنا', 'contact-info-tab': 'معلومات التواصل',
+        'contact-form-tab': 'راسلنا', 'contact-location-tab': 'موقعنا',
+        'whatsapp-btn': '💬 تواصل عبر واتساب', 'form-submit': 'إرسال الرسالة',
+        'map-placeholder': 'الخريطة هنا',
+        'footer': '© 2025 جميع الحقوق محفوظة - شركة الزهيري جروب'
+      },
+      en: {
+        'install-btn': '📲 Install App',
+        'logo': 'Al-Zuhairi Group', 'lang-switch': 'العربية',
+        'nav-home': 'Home', 'nav-about': 'About', 'nav-services': 'Services',
+        'nav-gallery': 'Gallery', 'nav-learning': 'Learn', 'nav-contact': 'Contact',
+        'home-title': 'Al-Zuhairi Group',
+        'home-subtitle': 'Integrated engineering expertise in design, execution, finishing, reconciliations, and licensing with the highest quality.',
+        'home-services-btn': 'Our Services', 'home-contact-btn': 'Contact Us',
+        'about-title': 'About Us', 'about-overview-tab': 'Overview', 'about-vision-tab': 'Vision',
+        'about-team-tab': 'Team', 'about-stats-tab': 'Stats',
+        'about-overview-p1': 'We provide integrated engineering solutions including design, supervision, execution, project management, and modern finishing.',
+        'about-overview-p2': 'Founded by specialized engineers in civil and architectural engineering, we strive to provide innovative services.',
+        'about-vision-label': '🎯 Our Vision',
+        'about-vision-text': 'To be the leading engineering company in Egypt and the Middle East through innovative and sustainable solutions.',
+        'team-name1': 'Eng. Mohamed Al-Zuhairi', 'team-role1': 'CEO - Engineering Consultant',
+        'team-name2': 'Eng. Hamed Hammad', 'team-role2': 'Project Manager - Civil Engineer',
+        'team-name3': 'Eng. Rahma Tahseen', 'team-role3': 'Architect - Interior Design',
+        'stat1': 'Projects', 'stat2': 'Years Exp.', 'stat3': 'Happy Clients', 'stat4': 'Engineers',
+        'services-title': 'Our Services', 'services-all-tab': 'All', 'services-design-tab': 'Design',
+        'services-finishing-tab': 'Finishing', 'services-supervision-tab': 'Supervision', 'services-licenses-tab': 'Licenses',
+        'service1-title': 'Engineering Design', 'service1-desc': 'Professional architectural and structural design.',
+        'service2-title': 'Finishing', 'service2-desc': 'High-quality finishing for all units.',
+        'service3-title': 'Supervision', 'service3-desc': 'Full project monitoring and management.',
+        'service4-title': 'Licenses', 'service4-desc': 'Completing licensing procedures.',
+        'details-btn': 'View Details',
+        'design-subtitle': '🏛️ Design Services', 'design-opt1': 'Villas & Palaces', 'design-opt1-desc': 'Modern & classic designs',
+        'design-opt2': 'Commercial Buildings', 'design-opt2-desc': 'Practical & attractive',
+        'design-opt3': 'Structural Plans', 'design-opt3-desc': 'Accurate safety standards',
+        'design-opt4': '3D Design', 'design-opt4-desc': 'Realistic visualization',
+        'finishing-subtitle': '🏢 Finishing Services', 'finishing-opt1': 'Residential', 'finishing-opt1-desc': 'Apartments & villas',
+        'finishing-opt2': 'Commercial', 'finishing-opt2-desc': 'Shops & offices',
+        'finishing-opt3': 'Painting', 'finishing-opt3-desc': 'Latest trends',
+        'finishing-opt4': 'Carpentry', 'finishing-opt4-desc': 'Luxury woodwork',
+        'supervision-subtitle': '👷 Supervision', 'supervision-opt1': 'Project Mgmt', 'supervision-opt1-desc': 'Planning & monitoring',
+        'supervision-opt2': 'Quality Control', 'supervision-opt2-desc': 'Material inspection',
+        'supervision-opt3': 'Scheduling', 'supervision-opt3-desc': 'Deadline commitment',
+        'licenses-subtitle': '📋 Licensing', 'licenses-opt1': 'Building Permits', 'licenses-opt1-desc': 'Legal permits',
+        'licenses-opt2': 'Reconciliations', 'licenses-opt2-desc': 'Procedures completion',
+        'licenses-opt3': 'Surveying', 'licenses-opt3-desc': 'Accurate surveying',
+        'gallery-title': 'Our Gallery', 'gallery-design-tab': 'Designs', 'gallery-finishing-tab': 'Finishing',
+        'gallery-projects-tab': 'Projects', 'gallery-3d-tab': '3D',
+        'gallery-cap1': 'Luxury Villa', 'gallery-cap2': '5-Story Building Plan',
+        'gallery-cap3': 'Commercial Facade', 'gallery-cap4': 'Apartment Finishing',
+        'gallery-cap5': 'Modern Villa', 'gallery-cap6': 'Interior Decoration',
+        'gallery-cap7': 'Admin Building - Sherbin', 'gallery-cap8': 'Residential - Dengway',
+        'gallery-cap9': '3D Villa View', 'gallery-cap10': '3D Interior',
+        'learning-title': 'Learn With Us', 'learning-courses-tab': 'Courses', 'learning-videos-tab': 'Videos',
+        'learning-tips-tab': 'Tips', 'learning-books-tab': 'Books',
+        'course1': 'Engineering Drawing Basics', 'course2': 'Advanced Structural Modeling',
+        'course3': 'Architectural Visualization', 'course4-title': 'Surveying', 'course4': 'Surveying Fundamentals',
+        'video1': 'Design Basics', 'video2': 'AutoCAD Tutorial', 'video3': 'Structural Design Lecture',
+        'tip1': 'Building Materials', 'tip1-desc': 'Best materials for your project',
+        'tip2': 'Cost Saving', 'tip2-desc': 'Smart budget management',
+        'tip3': 'Dream Home', 'tip3-desc': 'Design your dream home',
+        'book1': 'Civil Engineering', 'book1-desc': 'Complete reference',
+        'book2': 'Architectural Design', 'book2-desc': 'Design principles',
+        'book3': 'Egyptian Code', 'book3-desc': 'Official standards',
+        'contact-title': 'Contact Us', 'contact-info-tab': 'Info', 'contact-form-tab': 'Message', 'contact-location-tab': 'Location',
+        'whatsapp-btn': '💬 WhatsApp', 'form-submit': 'Send',
+        'map-placeholder': 'Map Here',
+        'footer': '© 2025 Al-Zuhairi Group. All rights reserved.'
+      }
+    };
+
+    const placeholders = {
+      ar: { 'form-name': 'الاسم الكامل', 'form-phone': 'رقم الهاتف', 'form-email': 'البريد الإلكتروني', 'form-message': 'اكتب رسالتك هنا...' },
+      en: { 'form-name': 'Full Name', 'form-phone': 'Phone Number', 'form-email': 'Email', 'form-message': 'Your message...' }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const htmlElement = document.documentElement;
+      const body = document.getElementById('bodyElement');
+      
+      if (currentLang === 'ar') {
+        htmlElement.setAttribute('dir', 'rtl'); htmlElement.setAttribute('lang', 'ar');
+        body.classList.remove('ltr');
+      } else {
+        htmlElement.setAttribute('dir', 'ltr'); htmlElement.setAttribute('lang', 'en');
+        body.classList.add('ltr');
+      }
+      
+      updateContent();
+      document.title = currentLang === 'ar' ? 'شركة الزهيري جروب | الهندسة المدنية والتصميم' : 'Al-Zuhairi Group | Civil Engineering & Design';
+      localStorage.setItem('site-lang', currentLang);
+    }
+
+    function updateContent() {
+      const langData = translations[currentLang];
+      const placeholderData = placeholders[currentLang];
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (langData[key]) el.textContent = langData[key];
+      });
+      document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-lang-placeholder');
+        if (placeholderData[key]) el.placeholder = placeholderData[key];
+      });
+      // تحديث القائمة السفلية
+      document.querySelectorAll('.bottom-nav-item span[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (langData[key]) el.textContent = langData[key];
+      });
+    }
+
+    function loadSavedLanguage() {
+      const savedLang = localStorage.getItem('site-lang');
+      if (savedLang === 'en') toggleLanguage();
+    }
+
+    // ========== التبويب ==========
+    function switchMainTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-links li').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+      
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) targetTab.classList.add('active');
+      
+      const targetNavLink = document.querySelector(`.nav-links li[onclick="switchMainTab('${tabId}')"]`);
+      if (targetNavLink) targetNavLink.classList.add('active');
+      
+      const targetBottomNav = document.querySelector(`.bottom-nav-item[onclick="switchMainTab('${tabId}')"]`);
+      if (targetBottomNav) targetBottomNav.classList.add('active');
+      
+      resetSubTabs(tabId);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchSubTab(parentId, subTabId) {
+      const parentSection = document.getElementById(parentId);
+      if (!parentSection) return;
+      parentSection.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+      parentSection.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      
+      const targetSubContent = document.getElementById(subTabId);
+      if (targetSubContent) targetSubContent.classList.add('active');
+      
+      const targetSubTab = parentSection.querySelector(`.sub-tab[onclick="switchSubTab('${parentId}', '${subTabId}')"]`);
+      if (targetSubTab) targetSubTab.classList.add('active');
+    }
+
+    function resetSubTabs(parentId) {
+      const parentSection = document.getElementById(parentId);
+      if (!parentSection) return;
+      const firstSubTab = parentSection.querySelector('.sub-tab');
+      const firstSubContent = parentSection.querySelector('.sub-content');
+      if (firstSubTab && firstSubContent) {
+        parentSection.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+        parentSection.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+        firstSubTab.classList.add('active');
+        firstSubContent.classList.add('active');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadSavedLanguage);
+  </script>
 
 </body>
 </html>
